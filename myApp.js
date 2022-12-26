@@ -6,7 +6,26 @@ const mongoUri = process.env.MONGO_URI;
 
 mongoose.connect(mongoUri,{ useNewUrlParser: true, useUnifiedTopology: true });
 
-let Person;
+
+// 2) Create a 'Person' Model
+
+//Assign Mongoose Schema to a variable
+const Schema = mongoose.Schema;
+
+//Create Person Schema
+const personSchema = new Schema({
+    name: {
+      type: String,
+      required: true
+    },
+    age: Number,
+    favoriteFoods: [{
+      type: String
+    }]
+  });
+
+//Create Person model from the schema
+const Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
@@ -60,7 +79,7 @@ const queryChain = (done) => {
 /* You completed these challenges, let's go celebrate !
  */
 
-//----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
+//----- **DO NOT EDIT BELOW THIS LINE** -------
 
 exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
