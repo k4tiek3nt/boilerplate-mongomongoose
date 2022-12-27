@@ -157,10 +157,20 @@ const removeById = function(personId, done) {
   );
 };
 
-const removeManyPeople = (done) => {
+//Delete Many Using model.remove() <- references Person.remove()
+const removeManyPeople = function(done) {
   const nameToRemove = "Mary";
 
-  done(null /*, data*/);
+  Person.remove({name: nameToRemove},
+    function(err, response) {
+    console.log(response);
+      if(err){
+        return console.error(err);
+      }else{
+        done(null, response);
+      };
+    }
+  );
 };
 
 const queryChain = (done) => {
