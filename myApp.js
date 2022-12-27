@@ -119,8 +119,8 @@ const findEditThenSave = function(personId, done) {
       console.log(updatedPerson);
       if (err) return console.log(err);
       done(null, updatedPerson);
-    });
-  });
+    })
+  })
 };
 
 const findAndUpdate = (personName, done) => {
