@@ -104,10 +104,23 @@ const findPersonById = function(personId, done) {
   });
 };
 
-const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+// Find, Edit, then Save
+// Old, long way to update a record
+const findEditThenSave = function(personId, done) {
+  const foodToAdd = 'hamburger';
+  // .findById() method to find a person by id
+  Person.findById(personId, function(err, person) {
+    console.log(person);
+    if (err) return console.log(err);
+    // Array.push() method to add "hamburger" to favoriteFoods
+    person.favoriteFoods.push(foodToAdd);
+    // and inside the find callback - save() the updated Person.
+    person.save(function(err, updatedPerson) {
+      console.log(updatedPerson);
+      if (err) return console.log(err);
+      done(null, updatedPerson);
+    });
+  });
 };
 
 const findAndUpdate = (personName, done) => {
