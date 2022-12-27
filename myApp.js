@@ -137,7 +137,7 @@ const findAndUpdate = function(personName, done) {
       if(err){
         return console.error(err);
       }else{
-        done(null,updatedPerson);
+        done(null, updatedPerson);
       };    
     }
   );
@@ -145,12 +145,13 @@ const findAndUpdate = function(personName, done) {
 
 //Delete One Using model.findByIdAndRemove <- references Person.findByIdAndRemove()
 const removeById = function(personId, done) {
-  Person.findByIdAndRemove(personId, function(err, removedPerson) {
+  Person.findByIdAndRemove(personId,           
+   function(err, removedPerson) {
       console.log(removedPerson);
       if(err){
         return console.error(err);
       }else{
-        done(null,removedPerson);
+        done(null, removedPerson);
       };
     }
   );
