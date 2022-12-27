@@ -173,11 +173,29 @@ const removeManyPeople = function(done) {
   );
 };
 
-const queryChain = (done) => {
+//Chain Search Query Helpers to Narrow Search Results
+const queryChain = function(done) {
   const foodToSearch = "burrito";
 
-  done(null /*, data*/);
+  Person.find({ favoriteFoods: foodToSearch },     function(err, personsFound) {
+    console.log(personsFound);
+    if(err){
+      return console.log(err);
+    };
+  })
+  .sort({name: 'asc'})
+  .limit(2)
+  .select('-age')
+  .exec(function(err, data) {
+    console.log(data);
+    if(err){
+      return console.error(err);
+    }else{
+      done(null, data);
+    };
+  });
 };
+queryChain(() => {});
 
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
