@@ -93,7 +93,7 @@ const findOneByFood = function(food, done) {
 
 
 // 7) Use `Model.findById()` <- references Person.findById()
-const findPersonById = (personId, done) => {
+const findPersonById = function(personId, done) {
   Person.findById(personId, function(err, personFound) {
     console.log(personFound);
     if(err){
