@@ -143,8 +143,17 @@ const findAndUpdate = function(personName, done) {
   );
 };
 
-const removeById = (personId, done) => {
-  done(null /*, data*/);
+//Delete One Using model.findByIdAndRemove <- references Person.findByIdAndRemove()
+const removeById = function(personId, done) {
+  Person.findByIdAndRemove(personId, function(err, removedPerson) {
+      console.log(removedPerson);
+      if(err){
+        return console.error(err);
+      }else{
+        done(null,removedPerson);
+      };
+    }
+  );
 };
 
 const removeManyPeople = (done) => {
