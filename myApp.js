@@ -86,13 +86,22 @@ const findOneByFood = function(food, done) {
     if(err){
       return console.log(err);
     } else{
-      done(null,personFound);
+      done(null, personFound);
     };
   });
 };
 
+
+// 7) Use `Model.findById()` <- references Person.findById()
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, function(err, personFound) {
+    console.log(personFound);
+    if(err){
+      return console.log(err);
+    } else{
+      done(null, personFound);
+    };
+  });
 };
 
 const findEditThenSave = (personId, done) => {
