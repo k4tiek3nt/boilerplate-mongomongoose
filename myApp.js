@@ -47,8 +47,24 @@ const createAndSavePerson = function(done) {
   });
 };
 
-const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+// 4) Create Many People with `Model.create()` <- references Person.create()
+
+//First create an array of people (many people in one)
+var arrayOfPeople = [
+  {name: "Rachel Greene", age: 52, favoriteFoods: ['spaghetti', 'english trifle', 'chinese food']},
+  {name: "Ross Geller", age: 55, favoriteFoods: ['chicken nuggets', 'juice box', 'beer']},
+  {name: "Monica Geller", age: 52, favoriteFoods: ['wine', 'fine dining', 'turkey', 'see food']},
+  {name: "Joey Tribbiani", age: 53, favoriteFoods: ['meat', 'potatoes', 'beer', 'pizza', 'salami', 'spaghetti', 'turkey', 'anything he can see']},
+  {name: "Phoebe Buffay", age: 52, favoriteFoods: ['vegetables', 'air', 'wine']},
+  {name: "Chandler Bing", age: 54, favoriteFoods: ['pizza', 'beer']}
+];
+
+//Take the array of people and put in the database at one time
+var createManyPeople = function(arrayOfPeople, done) {
+  Person.create(arrayOfPeople, function (err, people) {
+    if (err) return console.log(err);
+    done(null, people);
+  });
 };
 
 const findPeopleByName = (personName, done) => {
