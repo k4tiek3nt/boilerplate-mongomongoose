@@ -111,22 +111,36 @@ const findEditThenSave = function(personId, done) {
   // .findById() method to find a person by id
   Person.findById(personId, function(err, person) {
     console.log(person);
-    if (err) return console.log(err);
+    if(err) return console.log(err);
     // Array.push() method to add "hamburger" to favoriteFoods
     person.favoriteFoods.push(foodToAdd);
     // and inside the find callback - save() the updated Person.
     person.save(function(err, updatedPerson) {
       console.log(updatedPerson);
-      if (err) return console.log(err);
+      if(err) return console.log(err);
       done(null, updatedPerson);
     })
   })
 };
 
-const findAndUpdate = (personName, done) => {
+//Find and Update at same time
+//Newer, shorter way to update a record
+const findAndUpdate = function(personName, done) {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  
+  Person.findOneAndUpdate(
+    {name: personName}, 
+    {age: ageToSet}, 
+    {new: true}, 
+    function(err, updatedPerson) {
+      console.log(updatedPerson);
+      if(err){
+        return console.error(err);
+      }else{
+        done(null,updatedPerson);
+      };    
+    }
+  );
 };
 
 const removeById = (personId, done) => {
